@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    Contact
+    <!--<form action="" method="POST">
+        <input type="text" name="email"><br />
+        <input type="text" name="subject"><br />
+        <textarea name="message"></textarea><br />
+        <button>Envoyer</button>
+    </form>-->
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <button>Envoyer</button>
+    {{ form_end(form) }}
+{% endblock %}

@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class GameController extends Controller
 {
     /**
-     * @Route("/game")
+     * @Route("/game", name="game_home")
      */
     public function indexAction()
     {
