@@ -28,7 +28,7 @@ Part 3 :
 Part 4 :
 
 Le dictionnaire (Voir GameController)
-1. Créer le service dictionnary
+1. Créer le service Dictionnary
 2. Récupérer le service dans cette méthode
 3. Définir un tableau de mots dans le service (constante ? ...)
 4. La méthode getRandom() du service doit renvoyer un mot aléatoire
