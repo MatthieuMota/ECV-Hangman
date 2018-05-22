@@ -9,6 +9,10 @@ Version    : 1.0
 Released   : 20120125
 */
 
+* {
+    box-sizing: initial;
+}
+
 /*
  Web fonts
  ---------

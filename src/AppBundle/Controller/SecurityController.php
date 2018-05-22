@@ -16,6 +16,7 @@ use AppBundle\Form\RegisterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends Controller
 {
@@ -32,7 +33,7 @@ class SecurityController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function registerAction(Request $request)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
 
@@ -41,7 +42,8 @@ class SecurityController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Hash user password
-
+            $password = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
             // Register user to database
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
