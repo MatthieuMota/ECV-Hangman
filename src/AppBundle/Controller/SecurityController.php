@@ -17,15 +17,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends Controller
 {
     /**
-     * @Route("/{_locale}/login")
+     * @Route("/{_locale}/login", name="login")
      */
-    public function loginAction()
+    public function loginAction(AuthenticationUtils $authenticationUtils)
     {
-        return $this->render('security/login.html.twig');
+        // Si erreur de connexion
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // Dernier login saisi
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'error' => $error,
+            'lastUsername' => $lastUsername
+        ]);
     }
 
     /**
