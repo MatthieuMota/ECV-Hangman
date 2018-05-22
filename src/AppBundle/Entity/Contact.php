@@ -1,13 +1,5 @@
 <?php
 
-/*
- * This file is part of the projet-avec-composer package.
- *
- * (c) Matthieu Mota <matthieu@boxydev.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace AppBundle\Entity;
 
@@ -16,60 +8,69 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Contact
 {
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="app.subject")
      */
     private $subject;
-    private $email;
-    /**
-     * @Assert\Length(min = 15)
-     */
-    private $message;
 
     /**
-     * @return mixed
+     * @Assert\NotBlank(message="app.subject")
+     * @Assert\Email()
      */
+    private $sender;
+
+    /**
+     * @Assert\NotBlank(message="app.subject")
+     * @Assert\Length(min = 15, )
+     */
+    private $description;
+
+
     public function getSubject()
     {
         return $this->subject;
     }
 
-    /**
-     * @param mixed $subject
-     */
     public function setSubject($subject)
     {
         $this->subject = $subject;
+
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getEmail()
+    public function getSender()
     {
-        return $this->email;
+        return $this->sender;
     }
 
     /**
-     * @param mixed $email
+     * @param mixed $sender
+     * @return Contact
      */
-    public function setEmail($email)
+    public function setSender($sender)
     {
-        $this->email = $email;
+        $this->sender = $sender;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMessage()
+    public function getDescription()
     {
-        return $this->message;
+        return $this->description;
     }
 
     /**
-     * @param mixed $message
+     * @param mixed $description
+     * @return Contact
      */
-    public function setMessage($message)
+    public function setDescription($description)
     {
-        $this->message = $message;
+        $this->description = $description;
+        return $this;
     }
+
 }

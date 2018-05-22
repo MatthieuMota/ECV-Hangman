@@ -35,6 +35,14 @@
                 </div>
             </div>
             <div id="page">
+                <div>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+
                 <div id="content">
                     {% block body %}{% endblock %}
                 </div>

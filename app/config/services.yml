@@ -33,3 +33,7 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    mon_alias:
+        class: AppBundle\Services\MyMailer
+        public: true
