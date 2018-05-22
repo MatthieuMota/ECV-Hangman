@@ -29,5 +29,9 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                # Change redirect url when login
+                default_target_path: game_home
 
-            logout: true
+            logout:
+                path: logout
+                target: game_home

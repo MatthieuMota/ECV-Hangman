@@ -13,6 +13,10 @@ Released   : 20120125
     box-sizing: initial;
 }
 
+.hidden {
+    display: inline-block!important;
+}
+
 /*
  Web fonts
  ---------
