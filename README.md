@@ -23,3 +23,4 @@ Part 3 :
     - /fr/login -> Keep layout and add login form (no class)
         - email
         - password
+- Create user entity (id, email, password)
