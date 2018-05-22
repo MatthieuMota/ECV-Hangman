@@ -26,8 +26,8 @@ class ContactController extends Controller
             $this->addFlash('success', 'Demande de contact reçu');
 
             // On récupére une instance du service MyMailer
-            $this->get('mon_alias');
-            $this->get('mon_alias')->sendMessageFromContact($contact);
+            // On peut aussi utiliser $this->get('mon_alias');
+            $myMailer->sendMessageFromContact($contact);
 
             //return $this->redirectToRoute('game_home');
         }
