@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use AppBundle\Form\RegisterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,11 +34,18 @@ class SecurityController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $form = $this->createForm(RegisterType::class);
+        $user = new User();
+
+        $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Register code
+            // Hash user password
+
+            // Register user to database
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
         }
 
         return $this->render('security/register.html.twig', [
