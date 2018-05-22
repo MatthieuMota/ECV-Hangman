@@ -12,6 +12,8 @@ class GameController extends Controller
      */
     public function indexAction()
     {
+        // $word = $dictionnary->getRandom();
+
         return $this->render('game/index.html.twig');
     }
 }
