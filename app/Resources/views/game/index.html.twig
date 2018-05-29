@@ -8,7 +8,7 @@
     </p>
 
     <ul class="word_letters">
-        {% for i in 1..8 %}
+        {% for i in 1..wordLength %}
         <li class="letter hidden">
             ?
         </li>
@@ -28,7 +28,7 @@
     <ul>
         {% for letter in 'A'..'Z' %}
             <li class="letter">
-                <a href="/game/letter/{{ letter }}">
+                <a href="{{ path('game_try_letter', {letter: letter}) }}">
                     {{ letter }}
                 </a>
             </li>
