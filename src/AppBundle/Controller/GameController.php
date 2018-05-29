@@ -27,12 +27,27 @@ class GameController extends Controller
             $this->get('session')->set('game', $game);
         }
 
+        // Si le nombre d'essais est dépassé
+        if ($game->isOver()) {
+            $this->get('session')->remove('game'); // On reset la partie avant d'afficher la page "perdu"
+
+            return $this->render('game/lose.html.twig', ['game' => $game]);
+        }
+
         return $this->render('game/index.html.twig', [
             'game' => $game
         ]);
     }
 
     /**
+     *
+     * Créer la route /fr/game/letter/G. La route doit avoir un paramètre.
+     * Quand on se rend sur la route, on doit récupérer la partie qui est en session.
+     * On regarde si la lettre fait partie du mot.
+     * Si la lettre ne fait pas partie du mot alors on décrémente la valeur attempts
+     * Si la lettre fait partie du mot, trouver un moyen de garder dans la partie les lettres "trouvées"
+     * Faire une redirection vers /fr/game
+     *
      * @Route("/{_locale}/game/letter/{letter}", name="game_try_letter", requirements={
      *     "letter"="[A-Z]"
      * })
@@ -53,11 +68,12 @@ class GameController extends Controller
     }
 
     /**
-     * Créer la route /fr/game/letter/G. La route doit avoir un paramètre.
-     * Quand on se rend sur la route, on doit récupérer la partie qui est en session.
-     * On regarde si la lettre fait partie du mot.
-     * Si la lettre ne fait pas partie du mot alors on décrémente la valeur attempts
-     * Si la lettre fait partie du mot, trouver un moyen de garder dans la partie les lettres "trouvées"
-     * Faire une redirection vers /fr/game
+     * @Route("/{_locale}/game/reset", name="game_reset")
      */
+    public function resetAction()
+    {
+        $this->get('session')->remove('game'); // On reset la partie
+
+        return $this->redirectToRoute('game_home');
+    }
 }

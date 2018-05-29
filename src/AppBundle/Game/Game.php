@@ -40,9 +40,32 @@ class Game
         return strlen($this->word);
     }
 
+    /**
+     * Créer une méthode qui transforme le mot en tableau
+     * Utiliser la méthode dans la vue Twig
+     * Plutôt que de faire une boucle de 1 à la taille du mot
+     * Faire une boucle sur le mot en tableau et à chaque fois, regarder si la lettre a été trouvé ou non
+     * Pour savoir si la lettre a été trouvé ou non, on peut créer une méthode
+     */
+
+    public function getWordLetters()
+    {
+        return str_split($this->word);
+    }
+
+    public function isLetterFound($letter)
+    {
+        return in_array($letter, $this->foundLetters);
+    }
+
     public function getRemainingAttempts()
     {
         return self::MAX_ATTEMPTS - $this->attempts;
+    }
+
+    public function isOver()
+    {
+        return $this->attempts >= self::MAX_ATTEMPTS;
     }
 
     public function tryLetter($letter)

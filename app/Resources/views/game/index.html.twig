@@ -8,9 +8,9 @@
     </p>
 
     <ul class="word_letters">
-        {% for i in 1..game.wordLength %}
-        <li class="letter hidden">
-            ?
+        {% for letter in game.wordLetters %}
+        <li class="letter {{ game.letterFound(letter) ? 'guessed' }} hidden">
+            {{ game.letterFound(letter) ? letter : '?' }}
         </li>
         {% endfor %}
     </ul>
@@ -18,7 +18,7 @@
     <br class="clearfix" />
 
     <p class="attempts">
-        <a href="/game/reset">Reset the game</a>
+        <a href="{{ path('game_reset') }}">Reset the game</a>
     </p>
 
     <br class="clearfix" />
