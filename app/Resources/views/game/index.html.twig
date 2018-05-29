@@ -4,11 +4,11 @@
     <h2>{{ 'app.title'|trans }}</h2>
 
     <p class="attempts">
-        You still have 11 remaining attempts.
+        You still have {{ game.remainingAttempts }} remaining attempts.
     </p>
 
     <ul class="word_letters">
-        {% for i in 1..wordLength %}
+        {% for i in 1..game.wordLength %}
         <li class="letter hidden">
             ?
         </li>

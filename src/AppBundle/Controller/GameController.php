@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Game\Game;
 use AppBundle\Game\Dictionnary;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,20 +22,13 @@ class GameController extends Controller
         if (null === $game) { // On génére un mot s'il n'y a pas de partie en cours
             $word = $dictionnary->getRandom();
             // Génére la partie
-            $game = [
-                'word' => $word,
-                'attempts' => 11,
-                'foundLetters' => [], // les lettres qu'on a trouvé dans le mot
-                'triedLetters' => [], // les lettres qu'on a essayé
-            ];
+            $game = new Game($word);
             // On met le mot en session
             $this->get('session')->set('game', $game);
         }
 
-        dump($game);
-
         return $this->render('game/index.html.twig', [
-            'wordLength' => strlen($game['word'])
+            'game' => $game
         ]);
     }
 
@@ -46,21 +40,11 @@ class GameController extends Controller
     public function tryLetterAction($letter)
     {
         // On récupére le tableau contenant la partie
+        /** @var Game $game */
         $game = $this->get('session')->get('game');
 
         if ($game) { // Si la partie n'existe pas
-            $word = $game['word'];
-            $letter = strtolower($letter);
-
-            $checkLetterIsInWord = strpos($word, $letter);
-
-            if (false === $checkLetterIsInWord) { // Si la lettre ne fait pas partie du mot
-                $game['attempts']--;
-            }
-
-            if (false !== $checkLetterIsInWord) { // Si la lettre fait partie du mot
-                $game['foundLetters'][] = $letter;
-            }
+            $game->tryLetter($letter);
 
             $this->get('session')->set('game', $game);
         }
