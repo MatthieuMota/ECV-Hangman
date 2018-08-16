@@ -1,7 +1,7 @@
 Hangman with Symfony
 ========================
 
-https://github.com/MatthieuMota/ECV-Hangman
+https://github.com/matthieumota/ecv-hangman
 
 Part 1 & 2 :
 
